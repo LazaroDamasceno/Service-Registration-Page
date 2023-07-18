@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +27,7 @@ public class ServiceController {
         return service.getAll();
     }
 
-    public ResponseEntity<ServiceModel> getById(Long id) {
+    public ResponseEntity<ServiceModel> getById(@PathVariable(value = "id") Long id) {
         return service.getById(id);
     }
 
@@ -42,17 +44,17 @@ public class ServiceController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> add(ServiceModel model) {
+    public ResponseEntity<Void> add(@RequestBody ServiceModel model) {
         return service.save(model);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(ServiceModel model) {
+    public ResponseEntity<Void> update(@RequestBody ServiceModel model) {
         return service.save(model);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteById(Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable(value = "id") Long id) {
         return service.deleteById(id);
     }
 
