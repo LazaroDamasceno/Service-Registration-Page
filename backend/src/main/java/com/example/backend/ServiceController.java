@@ -27,18 +27,22 @@ public class ServiceController {
         return service.getAll();
     }
 
+    @GetMapping("{id}")
     public ResponseEntity<ServiceModel> getById(@PathVariable(value = "id") Long id) {
         return service.getById(id);
     }
 
+    @GetMapping("/pending")
     public ResponseEntity<List<ServiceModel>> getPendingServices() {
         return service.getPendingServices();
     }
 
+    @GetMapping("/done")
     public ResponseEntity<List<ServiceModel>> getDoneServices() {
         return service.getDoneServices();
     }
 
+    @GetMapping("/cancelled")
     public ResponseEntity<List<ServiceModel>> getCancelledervices() {
         return service.getCancelledervices();
     }
