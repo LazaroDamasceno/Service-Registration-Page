@@ -1,9 +1,9 @@
-function App() {
-  const [count, setCount] = useState(0)
+import Home from "./Home"
 
+function App() {
   return (
     <div>
-      
+      <Home />
     </div>
   )
 }
