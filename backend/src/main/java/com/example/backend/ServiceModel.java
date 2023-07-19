@@ -27,6 +27,7 @@ public class ServiceModel {
     @Temporal(TemporalType.DATE)
     private Date endingDate;
     private Double price;
+    private String description;
     private Double amountPaid;
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
