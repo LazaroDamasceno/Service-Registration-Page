@@ -2,6 +2,7 @@ import {
     useState, 
     useEffect 
 } from "react"
+import axios from 'axios'
 
 export default function Home() {
 
@@ -23,11 +24,18 @@ export default function Home() {
     const handleChange = (event) => {
       setService({...service, [event.target.name]:event.target.value})
     }
+    
+    const handlePostMethod = (/*event*/) => {
+      axios.post("http://localhost:8080/services", service).then(result => {
+        //event.preventDefault()
+        console.log(result)
+      })
+    }
 
     return (
       <div className="container">
         <h1>Sistema de Cadastro de Serviços</h1>
-        <form>
+        <form onSubmit={handlePostMethod}>
           <div className="col-6">
             <div>
               <label>Full Name: </label>
@@ -99,8 +107,39 @@ export default function Home() {
                 onChange={handleChange}
               />
             </div>
+            <br/>
+            <input type="submit"  className="btn btn-success" value="Register" />
           </div>
         </form>
+        <br/>
+        <hr/><hr/>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Starting Date</th>
+              <th scope="col">Ending Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Amount Paid</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+              {services.map(serv => {
+                <tr>
+                  <td scope="row">{serv.fullName}</td>
+                  <td scope="row">{serv.startingDate}</td>
+                  <td scope="row">{serv.endingDate}</td>
+                  <td scope="row">{serv.description}</td>
+                  <td scope="row">{serv.price}</td>
+                  <td scope="row">{serv.amountPaid}</td>
+                  <td scope="row">{serv.status}</td>
+                </tr>
+              })}
+          </tbody>
+      </table>
       </div>
     )
 

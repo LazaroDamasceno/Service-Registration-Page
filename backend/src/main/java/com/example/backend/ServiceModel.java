@@ -1,6 +1,6 @@
 package com.example.backend;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,13 +23,13 @@ public class ServiceModel {
     private Long id;
     private String fullName;
     @Temporal(TemporalType.DATE)
-    private LocalDate startingDate;
+    private Date startingDate;
     @Temporal(TemporalType.DATE)
-    private LocalDate endingDate;
+    private Date endingDate;
     private Double price;
     private Double amountPaid;
     @Temporal(TemporalType.DATE)
-    private LocalDate paymentDate;
-    private Status status;
+    private Date paymentDate;
+    private String status;
 
 }
