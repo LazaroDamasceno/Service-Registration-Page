@@ -9,8 +9,9 @@ This project was made following the steps of the [video](https://www.youtube.com
 |Technology|Version|
 |:-:|:-:|
 |Java|17.0.7|
-|React|18.0|
+|ReactJS|18.0|
 |Npm|9.8.0|
+|NodeJS|18.16.0|
 
 ## How to download the project
 
