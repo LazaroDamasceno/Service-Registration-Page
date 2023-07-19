@@ -51,6 +51,7 @@ public class ServiceService {
     }
 
     public ResponseEntity<Void> save(ServiceModel model) {
+        if (model.getStatus() == null) model.setStatus("PENDING");
         repository.saveAndFlush(model);
         return ResponseEntity.ok().build();
     }

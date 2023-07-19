@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function Home() {
 
     const [service, setService] = useState({
+        id: '',
         fullName: '',
         startingDate: '',
         endingDate: '',
@@ -25,11 +26,13 @@ export default function Home() {
       setService({ ...service, [event.target.name]: event.target.value })
     }
     
-    function handleSubmit(/*event*/) {
-      //event.preventDefault()
+    function handleSubmit(event) {
+      event.preventDefault()
       axios.post("http://localhost:8080/services", service).then((result) => {
         setUpdate(result) 
-    })}
+    })
+      console.log(services)
+    }
 
     useEffect(() => {
       axios.get("http://localhost:8080/services").then(result => {
@@ -121,7 +124,7 @@ export default function Home() {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">id</th>
+              <th scope="col">Id</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Starting Date</th>
                 <th scope="col">Ending Date</th>
@@ -129,10 +132,11 @@ export default function Home() {
                 <th scope="col">Price</th>
                 <th scope="col">Amount Paid</th>
                 <th scope="col">Status</th>
+                <th scope="col">Options</th>
               </tr>
             </thead>
             <tbody>
-                {services.map(serv => {
+                {services.map(serv => (
                   <tr key={serv.id}>
                     <td scope="row">{serv.id}</td>
                     <td scope="row">{serv.fullName}</td>
@@ -142,8 +146,9 @@ export default function Home() {
                     <td scope="row">{serv.price}</td>
                     <td scope="row">{serv.amountPaid}</td>
                     <td scope="row">{serv.status}</td>
+                    <td></td>
                   </tr>
-                })}
+                ))}
             </tbody>
         </table>
       </div>
