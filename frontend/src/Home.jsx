@@ -27,8 +27,8 @@ export default function Home() {
     }
     
     function handleSubmit(event) {
-      //event.preventDefault()
-      if (service.id == undefined) {
+      event.preventDefault()
+      if (service.id) {
         axios.post("http://localhost:8080/services", service).then((result) => {
           setUpdate(result) 
       })}
@@ -36,7 +36,7 @@ export default function Home() {
         axios.post("http://localhost:8080/services", service).then((result) => {
           setUpdate(result) 
       })}
-      //clearData()
+      clearData()
     }
 
     function deleteById(id) {

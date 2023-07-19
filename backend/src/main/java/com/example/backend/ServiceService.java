@@ -51,10 +51,10 @@ public class ServiceService {
     }
 
     public ResponseEntity<Void> save(ServiceModel model) {
-        if (model.getStatus() == "") {
+        if (model.getStatus() == "") { 
             model.setStatus("PENDING");
-            repository.saveAndFlush(model);
         }
+        repository.saveAndFlush(model);
         return ResponseEntity.ok().build();
     }
 
