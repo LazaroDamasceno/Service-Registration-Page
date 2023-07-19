@@ -21,15 +21,15 @@ export default function Home() {
 
     const [update, setUpdate] = useState()
 
-    const handleChange = (event) => {
-      setService({...service, [event.target.name]:event.target.value})
+    function handleChange(event) {
+      setService({ ...service, [event.target.name]: event.target.value })
     }
     
-    const handlePostMethod = () => {
-      axios.post("http://localhost:8080/services", service).then(result => {
-        setUpdate(result)
-      })
-    }
+    function handleSubmit(/*event*/) {
+      //event.preventDefault()
+      axios.post("http://localhost:8080/services", service).then((result) => {
+        setUpdate(result) 
+    })}
 
     useEffect(() => {
       axios.get("http://localhost:8080/services").then(result => {
@@ -40,7 +40,7 @@ export default function Home() {
     return (
       <div className="container">
         <h1>Sistema de Cadastro de Serviços</h1>
-        <form onSubmit={handlePostMethod}>
+        <form onSubmit={handleSubmit}>
           <div className="col-6">
             <div>
               <label>Full Name: </label>
@@ -115,37 +115,37 @@ export default function Home() {
             <br/>
             <input type="submit"  className="btn btn-success" value="Register" />
           </div>
-        </form>
-        <br/>
-        <hr/><hr/>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Starting Date</th>
-              <th scope="col">Ending Date</th>
-              <th scope="col">Description</th>
-              <th scope="col">Price</th>
-              <th scope="col">Amount Paid</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-              {services.map(serv => {
-                <tr key={serv.id}>
-                  <td scope="row">{serv.id}</td>
-                  <td scope="row">{serv.fullName}</td>
-                  <td scope="row">{serv.startingDate}</td>
-                  <td scope="row">{serv.endingDate}</td>
-                  <td scope="row">{serv.description}</td>
-                  <td scope="row">{serv.price}</td>
-                  <td scope="row">{serv.amountPaid}</td>
-                  <td scope="row">{serv.status}</td>
-                </tr>
-              })}
-          </tbody>
-      </table>
+          </form>
+          <br/>
+          <hr/><hr/>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Starting Date</th>
+                <th scope="col">Ending Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Amount Paid</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                {services.map(serv => {
+                  <tr key={serv.id}>
+                    <td scope="row">{serv.id}</td>
+                    <td scope="row">{serv.fullName}</td>
+                    <td scope="row">{serv.startingDate}</td>
+                    <td scope="row">{serv.endingDate}</td>
+                    <td scope="row">{serv.description}</td>
+                    <td scope="row">{serv.price}</td>
+                    <td scope="row">{serv.amountPaid}</td>
+                    <td scope="row">{serv.status}</td>
+                  </tr>
+                })}
+            </tbody>
+        </table>
       </div>
     )
 
