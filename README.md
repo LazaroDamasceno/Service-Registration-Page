@@ -19,3 +19,5 @@ This project was made following the steps of the [video](https://www.youtube.com
 ## How to run the backend
 
 ## Final notes
+
+## Project running
