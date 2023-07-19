@@ -25,12 +25,17 @@ export default function Home() {
       setService({...service, [event.target.name]:event.target.value})
     }
     
-    const handlePostMethod = (/*event*/) => {
+    const handlePostMethod = () => {
       axios.post("http://localhost:8080/services", service).then(result => {
-        //event.preventDefault()
-        console.log(result)
+        setUpdate(result)
       })
     }
+
+    useEffect(() => {
+      axios.get("http://localhost:8080/services").then(result => {
+        setServices(result.data)
+      })
+    }, [update])
 
     return (
       <div className="container">
@@ -128,7 +133,8 @@ export default function Home() {
           </thead>
           <tbody>
               {services.map(serv => {
-                <tr>
+                <tr key={serv.id}>
+                  <td scope="row">{serv.id}</td>
                   <td scope="row">{serv.fullName}</td>
                   <td scope="row">{serv.startingDate}</td>
                   <td scope="row">{serv.endingDate}</td>

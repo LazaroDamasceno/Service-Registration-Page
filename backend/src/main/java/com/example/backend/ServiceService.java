@@ -27,7 +27,7 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals(Status.PENDING))
+            .filter(e -> e.getStatus().equals("PENDING"))
             .toList();
         return ResponseEntity.ok(list);
     }
@@ -36,7 +36,7 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals(Status.DONE))
+            .filter(e -> e.getStatus().equals("DONE"))
             .toList();
         return ResponseEntity.ok(list);
     }
@@ -45,7 +45,7 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals(Status.CANCELLED))
+            .filter(e -> e.getStatus().equals("CANCELLED"))
             .toList();
         return ResponseEntity.ok(list);
     }
