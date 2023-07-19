@@ -179,11 +179,15 @@ export default function Home() {
                           <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
                         </div>
                       }
-                      <button onClick={()=>setService(serv)} className="btn btn-primary">Update</button>
                       &nbsp;&nbsp;
-                      <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
-                      &nbsp;&nbsp;
-                      <button onClick={()=>cancelById(serv.id)} className="btn btn-warning">Cancel</button>
+                      {serv.status != 'CANCELLED' && <div>
+                        <button onClick={()=>setService(serv)} className="btn btn-primary">Update</button>
+                        &nbsp;&nbsp;
+                        <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
+                        &nbsp;&nbsp;
+                        <button onClick={()=>cancelById(serv.id)} className="btn btn-warning">Cancel</button>
+                        </div>
+                      }
                     </td>
                   </tr>
                 ))}
