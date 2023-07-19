@@ -9,6 +9,7 @@ This project was made following the steps of the [video](https://www.youtube.com
 |Technology|Version|
 |:-:|:-:|
 |Java|17.0.7|
+|Spring Boot|3.1.1|
 |ReactJS|18.0|
 |Npm|9.8.0|
 |NodeJS|18.16.0|
