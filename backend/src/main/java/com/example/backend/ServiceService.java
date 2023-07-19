@@ -53,13 +53,17 @@ public class ServiceService {
     public ResponseEntity<Void> save(ServiceModel model) {
         if (model.getStatus() == "") {
             model.setStatus("PENDING");
+            repository.saveAndFlush(model);
         }
-        repository.saveAndFlush(model);
         return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<Void> cancelService(ServiceModel model) {
-        repository.saveAndFlush(model);
+    public ResponseEntity<Void> cancelService(Long id) {
+        var model = repository.findById(id).get();
+        if (model.getStatus().equals("PENDING")) {
+            model.setStatus("CANCELLED");
+            repository.saveAndFlush(model);
+        }
         return ResponseEntity.ok().build();
     }
 

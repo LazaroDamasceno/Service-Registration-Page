@@ -27,12 +27,40 @@ export default function Home() {
     }
     
     function handleSubmit(event) {
-      event.preventDefault()
-      axios.post("http://localhost:8080/services", service).then((result) => {
-        setUpdate(result) 
-    })
-      console.log(services)
+      //event.preventDefault()
+      if (service.id == undefined) {
+        axios.post("http://localhost:8080/services", service).then((result) => {
+          setUpdate(result) 
+      })}
+      else {
+        axios.post("http://localhost:8080/services", service).then((result) => {
+          setUpdate(result) 
+      })}
+      //clearData()
     }
+
+    function deleteById(id) {
+      axios.delete("http://localhost:8080/services/" + id).then(result => {
+        setUpdate(result)
+    })}
+
+    function cancelById(id) {
+      axios.put("http://localhost:8080/services/cancel/" + id).then(result => {
+        setUpdate(result)
+    })}
+
+    function clearData() {
+      setService({
+        id: '',
+        fullName: '',
+        startingDate: '',
+        endingDate: '',
+        description: '',
+        price: '',
+        amountPaid: '',
+        paymentDate: '',
+        status: ''
+      })}
 
     useEffect(() => {
       axios.get("http://localhost:8080/services").then(result => {
@@ -50,7 +78,7 @@ export default function Home() {
               <input 
                 type="text" 
                 name="fullName" 
-                value={service.fullName} 
+                value={service.fullName || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -60,7 +88,7 @@ export default function Home() {
               <input 
                 type="date" 
                 name="startingDate" 
-                value={service.startingDate} 
+                value={service.startingDate || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -70,7 +98,7 @@ export default function Home() {
               <input 
                 type="date" 
                 name="endingDate" 
-                value={service.endingDate} 
+                value={service.endingDate || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -80,7 +108,7 @@ export default function Home() {
               <input 
                 type="text" 
                 name="description" 
-                value={service.description} 
+                value={service.description || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -90,7 +118,7 @@ export default function Home() {
               <input 
                 type="number" 
                 name="price" 
-                value={service.price} 
+                value={service.price || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -100,7 +128,7 @@ export default function Home() {
               <input 
                 type="number" 
                 name="amountPaid" 
-                value={service.amountPaid} 
+                value={service.amountPaid || ''} 
                 className="form-control" 
                 onChange={handleChange}
               />
@@ -110,7 +138,7 @@ export default function Home() {
               <input 
                 type="date"
                 name="paymentDate"
-                value={service.paymentDate}
+                value={service.paymentDate || ''}
                 className="form-control"
                 onChange={handleChange}
               />
@@ -146,7 +174,17 @@ export default function Home() {
                     <td scope="row">{serv.price}</td>
                     <td scope="row">{serv.amountPaid}</td>
                     <td scope="row">{serv.status}</td>
-                    <td></td>
+                    <td>
+                      {serv.status == 'CANCELLED' && <div>
+                          <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
+                        </div>
+                      }
+                      <button onClick={()=>setService(serv)} className="btn btn-primary">Update</button>
+                      &nbsp;&nbsp;
+                      <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
+                      &nbsp;&nbsp;
+                      <button onClick={()=>cancelById(serv.id)} className="btn btn-warning">Cancel</button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

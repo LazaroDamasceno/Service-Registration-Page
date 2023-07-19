@@ -59,9 +59,9 @@ public class ServiceController {
         return service.save(model);
     }
 
-    @PutMapping("/cancel")
-    public ResponseEntity<Void> cancelService(@RequestBody ServiceModel model) {
-        return service.cancelService(model);
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Void> cancelService(@PathVariable(value = "id") Long id) {
+        return service.cancelService(id);
     }
 
     @DeleteMapping("{id}")
