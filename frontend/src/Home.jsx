@@ -33,40 +33,39 @@ export default function Home() {
           setUpdate(result) 
       })}
       else {
-        axios.post("http://localhost:8080/services", service).then((result) => {
+        axios.put("http://localhost:8080/services", service).then((result) => {
           setUpdate(result) 
       })}
       clearData()
     }
 
     function deleteById(id) {
-      axios.delete("http://localhost:8080/services/" + id).then(result => {
+      axios.delete("http://localhost:8080/services/" + id).then((result) => {
         setUpdate(result)
     })}
 
     function cancelById(id) {
-      axios.put("http://localhost:8080/services/cancel/" + id).then(result => {
+      axios.put("http://localhost:8080/services/cancel/" + id).then((result) => {
         setUpdate(result)
     })}
 
+    useEffect(() => {
+      getAll()
+    }, [update])
+
     function getAll() {
-      axios.get("http://localhost:8080/services").then(result => {
-        setUpdate(result)
+      axios.get("http://localhost:8080/services").then((result) => {
+        setServices(result.data)
     })}
 
     function getPendingServives() {
-      axios.get("http://localhost:8080/services/pending").then(result => {
-        setUpdate(result)
-    })}
-
-    function getDoneServives() {
-      axios.get("http://localhost:8080/services/done").then(result => {
-        setUpdate(result)
+      axios.get("http://localhost:8080/services/pending").then((result) => {
+        setServices(result.data)
     })}
 
     function getCancelledServives() {
-      axios.get("http://localhost:8080/services/cancelled").then(result => {
-        setUpdate(result)
+      axios.get("http://localhost:8080/services/cancelled").then((result) => {
+        setServices(result.data)
     })}
 
     function clearData() {
@@ -81,12 +80,6 @@ export default function Home() {
         paymentDate: '',
         status: ''
       })}
-
-    useEffect(() => {
-      axios.get("http://localhost:8080/services").then(result => {
-        setServices(result.data)
-      })
-    }, [update])
 
     return (
       <div className="container">
@@ -169,15 +162,15 @@ export default function Home() {
           </form>
           <br/>
           <hr/><hr/>
+
           <div>
-          <button onClick={getPendingServives()} type="button" className="btn btn-secondary">Get All</button>
+            <button onClick={getAll} className="btn btn-secondary">Get All</button>
             &nbsp;&nbsp;
-            <button onClick={getPendingServives()} type="button" className="btn btn-secondary">Get Pending Servics</button>
+            <button onClick={getCancelledServives} className="btn btn-secondary">Get Cancelled</button>
             &nbsp;&nbsp;
-            <button onClick={getDoneServives()} type="button" className="btn btn-secondary">Get Done Servics</button>
-            &nbsp;&nbsp;
-            <button onClick={getCancelledServives()} type="button" className="btn btn-secondary">Get Cancelled Servics</button>
+            <button onClick={getPendingServives} className="btn btn-secondary">Get Peding</button>
           </div>
+
           <table className="table">
             <thead>
               <tr>
