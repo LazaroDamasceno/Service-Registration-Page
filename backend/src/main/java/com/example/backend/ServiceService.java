@@ -1,7 +1,6 @@
 package com.example.backend;
 
 import java.util.List;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,63 +12,60 @@ public class ServiceService {
         this.repository = repository;
     }
 
-    public ResponseEntity<List<ServiceModel>> getAll() {
+    public List<ServiceModel> getAll() {
         var list = repository.findAll();
-        return ResponseEntity.ok(list);
+        return list;
     }
 
-    public ResponseEntity<ServiceModel> getById(Long id) {
+    public ServiceModel getById(Long id) {
         var model = repository.findById(id).get();
-        return ResponseEntity.ok(model);
+        return model;
     }
 
-    public ResponseEntity<List<ServiceModel>> getPendingServices() {
+    public List<ServiceModel> getPendingServices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals("PENDING"))
             .toList();
-        return ResponseEntity.ok(list);
+        return list;
     }
 
-    public ResponseEntity<List<ServiceModel>> getDoneServices() {
+    public List<ServiceModel> getDoneServices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals("DONE"))
             .toList();
-        return ResponseEntity.ok(list);
+        return list;
     }
 
-    public ResponseEntity<List<ServiceModel>> getCancelledervices() {
+    public List<ServiceModel> getCancelledervices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals("CANCELLED"))
             .toList();
-        return ResponseEntity.ok(list);
+        return list;
     }
 
-    public ResponseEntity<Void> save(ServiceModel model) {
+    public void save(ServiceModel model) {
         if (model.getStatus() == "") { 
             model.setStatus("PENDING");
         }
         repository.saveAndFlush(model);
-        return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<Void> cancelService(Long id) {
+    public void cancelService(Long id) {
         var model = repository.findById(id).get();
         if (model.getStatus().equals("PENDING")) {
             model.setStatus("CANCELLED");
             repository.saveAndFlush(model);
         }
-        return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<Void> deleteById(Long id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
     
 }

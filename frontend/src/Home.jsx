@@ -49,6 +49,26 @@ export default function Home() {
         setUpdate(result)
     })}
 
+    function getAll() {
+      axios.get("http://localhost:8080/services").then(result => {
+        setUpdate(result)
+    })}
+
+    function getPendingServives() {
+      axios.get("http://localhost:8080/services/pending").then(result => {
+        setUpdate(result)
+    })}
+
+    function getDoneServives() {
+      axios.get("http://localhost:8080/services/done").then(result => {
+        setUpdate(result)
+    })}
+
+    function getCancelledServives() {
+      axios.get("http://localhost:8080/services/cancelled").then(result => {
+        setUpdate(result)
+    })}
+
     function clearData() {
       setService({
         id: '',
@@ -149,6 +169,15 @@ export default function Home() {
           </form>
           <br/>
           <hr/><hr/>
+          <div>
+          <button onClick={getPendingServives()} type="button" className="btn btn-secondary">Get All</button>
+            &nbsp;&nbsp;
+            <button onClick={getPendingServives()} type="button" className="btn btn-secondary">Get Pending Servics</button>
+            &nbsp;&nbsp;
+            <button onClick={getDoneServives()} type="button" className="btn btn-secondary">Get Done Servics</button>
+            &nbsp;&nbsp;
+            <button onClick={getCancelledServives()} type="button" className="btn btn-secondary">Get Cancelled Servics</button>
+          </div>
           <table className="table">
             <thead>
               <tr>
@@ -179,7 +208,6 @@ export default function Home() {
                           <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
                         </div>
                       }
-                      &nbsp;&nbsp;
                       {serv.status != 'CANCELLED' && <div>
                         <button onClick={()=>setService(serv)} className="btn btn-primary">Update</button>
                         &nbsp;&nbsp;
