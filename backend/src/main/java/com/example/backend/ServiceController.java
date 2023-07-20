@@ -2,6 +2,7 @@ package com.example.backend;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,48 +25,48 @@ public class ServiceController {
     }
 
     @GetMapping
-    public List<ServiceModel> getAll() {
+    public ResponseEntity<List<ServiceModel>> getAll() {
         return service.getAll();
     }
 
     @GetMapping("{id}")
-    public ServiceModel getById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<ServiceModel> getById(@PathVariable(value = "id") Long id) {
         return service.getById(id);
     }
 
     @GetMapping("/pending")
-    public List<ServiceModel> getPendingServices() {
+    public ResponseEntity<List<ServiceModel>> getPendingServices() {
         return service.getPendingServices();
     }
 
     @GetMapping("/done")
-    public List<ServiceModel> getDoneServices() {
+    public ResponseEntity<List<ServiceModel>> getDoneServices() {
         return service.getDoneServices();
     }
 
     @GetMapping("/cancelled")
-    public List<ServiceModel> getCancelledervices() {
+    public ResponseEntity<List<ServiceModel>> getCancelledervices() {
         return service.getCancelledervices();
     }
 
     @PostMapping
-    public void add(@RequestBody ServiceModel model) {
-        service.save(model);
+    public ResponseEntity<Void> add(@RequestBody ServiceModel model) {
+        return service.save(model);
     }
 
     @PutMapping
-    public void update(@RequestBody ServiceModel model) {
-        service.save(model);
+    public ResponseEntity<Void> update(@RequestBody ServiceModel model) {
+        return service.save(model);
     }
 
     @PutMapping("/cancel/{id}")
-    public void cancelService(@PathVariable(value = "id") Long id) {
-        service.cancelService(id);
+    public ResponseEntity<Void> cancelService(@PathVariable(value = "id") Long id) {
+        return service.cancelService(id);
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable(value = "id") Long id) {
-        service.deleteById(id);
+    public ResponseEntity<Void> deleteById(@PathVariable(value = "id") Long id) {
+        return service.deleteById(id);
     }
 
     
