@@ -24,26 +24,24 @@ To run the project, it is necessary to have both frontend and backend be running
 
 ## How to download the project
 
-### Using the Visual Studio Code
+First, Open the CMD. 
 
-**Note:** If the Visual Studio Code  (VSC) is not installed, [click here](https://code.visualstudio.com/download).
+Finally, type `git clone https://github.com/LazaroDamasceno/Service-Registration-System.git`. 
 
-Step 1: open the CMD. 
+##  How to run the project
 
-Step 2: type `git clone https://github.com/LazaroDamasceno/Service-Registration-System.git`. 
+Open two CMDs.
 
-Step: 3: type `cd Service-Registration-System.git`. 
+In both of them, type `cd Service-Registration-System.git`.
 
-Step 4: type `code .`.
+On the frontend's CMD, type `cd frontend`.
 
-### Not using the Visual Studio Code
+On the frontend's CMD, type `npm install`.
 
-## How to run the frontend
+On the frontend's CMD, type ``npm run dev`.
 
+On the backend's CMD, type `cd backend`.
 
-
-## How to run the backend
-
-## Final notes
+On the backend's CMD, type `./mvnw clean spring-boot:rub` if the OS is Windows.
 
 ## Project running
