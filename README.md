@@ -38,7 +38,7 @@ On the frontend's CMD, type `cd frontend`.
 
 On the frontend's CMD, type `npm install`.
 
-On the frontend's CMD, type ``npm run dev`.
+On the frontend's CMD, type `npm run dev`.
 
 On the backend's CMD, type `cd backend`.
 
