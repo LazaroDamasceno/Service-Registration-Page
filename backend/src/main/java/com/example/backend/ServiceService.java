@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -52,8 +53,16 @@ public class ServiceService {
     }
 
     public ResponseEntity<Void> save(ServiceModel model) {
+        double charge;
         if (model.getStatus() == "") { 
             model.setStatus("PENDING");
+            model.setRequestingDate(LocalDate.now());
+        }
+        if (model.getPrice() <= model.getAmountPaid()) {
+            model.setStatus("DONE");
+            model.setPaymentDate(LocalDate.now());
+            charge = model.getAmountPaid() - model.getPrice();
+            model.setChange(charge);
         }
         repository.saveAndFlush(model);
         return ResponseEntity.ok().build();

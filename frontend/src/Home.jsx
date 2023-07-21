@@ -9,11 +9,11 @@ export default function Home() {
     const [service, setService] = useState({
         id: '',
         fullName: '',
-        startingDate: '',
-        endingDate: '',
+        requestingDate: '',
         description: '',
         price: '',
         amountPaid: '',
+        change: '',
         paymentDate: '',
         status: ''
     })
@@ -63,6 +63,12 @@ export default function Home() {
         setServices(result.data)
     })}
 
+    
+    function getDoneServives() {
+      axios.get("http://localhost:8080/services/done").then((result) => {
+        setServices(result.data)
+    })}
+
     function getCancelledServives() {
       axios.get("http://localhost:8080/services/cancelled").then((result) => {
         setServices(result.data)
@@ -72,8 +78,7 @@ export default function Home() {
       setService({
         id: '',
         fullName: '',
-        startingDate: '',
-        endingDate: '',
+        requestingDate: '',
         description: '',
         price: '',
         amountPaid: '',
@@ -95,27 +100,7 @@ export default function Home() {
                 className="form-control" 
                 onChange={handleChange}
               />
-            </div>
-            <div>
-              <label>Starting Date: </label>
-              <input 
-                type="date" 
-                name="startingDate" 
-                value={service.startingDate || ''} 
-                className="form-control" 
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Ending Date: </label>
-              <input 
-                type="date" 
-                name="endingDate" 
-                value={service.endingDate || ''} 
-                className="form-control" 
-                onChange={handleChange}
-              />
-            </div>    
+            </div>   
             <div>
               <label>Description: </label>
               <input 
@@ -146,16 +131,6 @@ export default function Home() {
                 onChange={handleChange}
               />
             </div>   
-            <div>
-              <label>Payment Date: </label>
-              <input 
-                type="date"
-                name="paymentDate"
-                value={service.paymentDate || ''}
-                className="form-control"
-                onChange={handleChange}
-              />
-            </div>
             <br/>
             <input type="submit"  className="btn btn-success" value="Register" />
           </div>
@@ -164,11 +139,13 @@ export default function Home() {
           <hr/><hr/>
 
           <div>
-            <button onClick={getAll} className="btn btn-secondary">Get All</button>
+            <button onClick={getAll} className="btn btn-secondary">Get All Services</button>
             &nbsp;&nbsp;
-            <button onClick={getCancelledServives} className="btn btn-secondary">Get Cancelled</button>
+            <button onClick={getDoneServives} className="btn btn-secondary">Get Done Services</button>
             &nbsp;&nbsp;
-            <button onClick={getPendingServives} className="btn btn-secondary">Get Peding</button>
+            <button onClick={getCancelledServives} className="btn btn-secondary">Get Cancelled Services</button>
+            &nbsp;&nbsp;
+            <button onClick={getPendingServives} className="btn btn-secondary">Get Pending Services</button>
           </div>
 
           <table className="table">
@@ -176,11 +153,12 @@ export default function Home() {
               <tr>
               <th scope="col">Id</th>
                 <th scope="col">Full Name</th>
-                <th scope="col">Starting Date</th>
-                <th scope="col">Ending Date</th>
+                <th scope="col">Requesting Date</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
                 <th scope="col">Amount Paid</th>
+                <th scope="col">Change</th>
+                <th scope="col">Payment Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Options</th>
               </tr>
@@ -190,18 +168,23 @@ export default function Home() {
                   <tr key={serv.id}>
                     <td scope="row">{serv.id}</td>
                     <td scope="row">{serv.fullName}</td>
-                    <td scope="row">{serv.startingDate}</td>
-                    <td scope="row">{serv.endingDate}</td>
+                    <td scope="row">{serv.requestingDate}</td>
                     <td scope="row">{serv.description}</td>
                     <td scope="row">{serv.price}</td>
                     <td scope="row">{serv.amountPaid}</td>
+                    <td scope="row">{serv.change}</td>
+                    <td scope="row">{serv.paymentDate}</td>
                     <td scope="row">{serv.status}</td>
                     <td>
                       {serv.status == 'CANCELLED' && <div>
                           <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
                         </div>
                       }
-                      {serv.status != 'CANCELLED' && <div>
+                      {serv.status == 'DONE' && <div>
+                          <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
+                        </div>
+                      }
+                      {serv.status == 'PENDING' && <div>
                         <button onClick={()=>setService(serv)} className="btn btn-primary">Update</button>
                         &nbsp;&nbsp;
                         <button onClick={()=>deleteById(serv.id)} className="btn btn-danger">Delete</button>
