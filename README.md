@@ -47,3 +47,8 @@ On the backend's CMD, type `cd backend`.
 On the backend's CMD, type `./mvnw clean spring-boot:rub` if the OS is Windows.
 
 ## Project running
+
+[Click here](https://youtu.be/Hxe0huVHWVo) to see the 1st version working. It was before the changes.
+
+[Click here](https://youtu.be/jFHEg0QLGXA) to see the 2nd version working.
+
