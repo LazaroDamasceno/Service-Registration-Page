@@ -15,41 +15,39 @@ public class ServiceService {
         this.repository = repository;
     }
 
-    public ResponseEntity<List<ServiceModel>> getAll() {
-        var list = repository.findAll();
-        return ResponseEntity.ok(list);
+    public ResponseEntity<List<ServiceDTO>> getAll() {
+        return ServiceDTO.dtoMapper(repository.findAll());
     }
 
-    public ResponseEntity<ServiceModel> getById(Long id) {
-        var model = repository.findById(id).get();
-        return ResponseEntity.ok(model);
+    public ResponseEntity<ServiceDTO> getById(Long id) {
+        return ServiceDTO.createInstance(repository.findById(id).get());
     }
 
-    public ResponseEntity<List<ServiceModel>> getPendingServices() {
+    public ResponseEntity<List<ServiceDTO>> getPendingServices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals(Status.PENDING))
             .toList();
-        return ResponseEntity.ok(list);
+        return ServiceDTO.dtoMapper(list);
     }
 
-    public ResponseEntity<List<ServiceModel>> getDoneServices() {
+    public ResponseEntity<List<ServiceDTO>> getDoneServices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals(Status.DONE))
             .toList();
-        return ResponseEntity.ok(list);
+        return ServiceDTO.dtoMapper(list);
     }
 
-    public ResponseEntity<List<ServiceModel>> getCancelledervices() {
+    public ResponseEntity<List<ServiceDTO>> getCancelledervices() {
         var list = repository
             .findAll()
             .stream()
             .filter(e -> e.getStatus().equals(Status.CANCELLED))
             .toList();
-        return ResponseEntity.ok(list);
+        return ServiceDTO.dtoMapper(list);
     }
 
     public ResponseEntity<Void> save(ServiceModel model) {

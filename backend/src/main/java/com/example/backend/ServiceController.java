@@ -25,27 +25,27 @@ public class ServiceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ServiceModel>> getAll() {
+    public ResponseEntity<List<ServiceDTO>> getAll() {
         return service.getAll();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ServiceModel> getById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<ServiceDTO> getById(@PathVariable(value = "id") Long id) {
         return service.getById(id);
     }
 
     @GetMapping("/pending")
-    public ResponseEntity<List<ServiceModel>> getPendingServices() {
+    public ResponseEntity<List<ServiceDTO>> getPendingServices() {
         return service.getPendingServices();
     }
 
     @GetMapping("/done")
-    public ResponseEntity<List<ServiceModel>> getDoneServices() {
+    public ResponseEntity<List<ServiceDTO>> getDoneServices() {
         return service.getDoneServices();
     }
 
     @GetMapping("/cancelled")
-    public ResponseEntity<List<ServiceModel>> getCancelledervices() {
+    public ResponseEntity<List<ServiceDTO>> getCancelledervices() {
         return service.getCancelledervices();
     }
 
