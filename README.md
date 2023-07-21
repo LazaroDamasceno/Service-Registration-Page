@@ -4,6 +4,8 @@
 
 This project was made following the steps of this [video](https://www.youtube.com/watch?v=Sun4wXH88V4&t=6862s).
 
+Few changes have been made in the project.
+
 ## Tecnologies used
 
 |Technology|Version|
