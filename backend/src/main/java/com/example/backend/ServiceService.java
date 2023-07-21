@@ -29,7 +29,7 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals("PENDING"))
+            .filter(e -> e.getStatus().equals(Status.PENDING))
             .toList();
         return ResponseEntity.ok(list);
     }
@@ -38,7 +38,7 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals("DONE"))
+            .filter(e -> e.getStatus().equals(Status.DONE))
             .toList();
         return ResponseEntity.ok(list);
     }
@@ -47,19 +47,19 @@ public class ServiceService {
         var list = repository
             .findAll()
             .stream()
-            .filter(e -> e.getStatus().equals("CANCELLED"))
+            .filter(e -> e.getStatus().equals(Status.CANCELLED))
             .toList();
         return ResponseEntity.ok(list);
     }
 
     public ResponseEntity<Void> save(ServiceModel model) {
         double charge;
-        if (model.getStatus() == "") { 
-            model.setStatus("PENDING");
+        if (model.getStatus() == null) { 
+            model.setStatus(Status.PENDING);
             model.setRequestingDate(LocalDate.now());
         }
         if (model.getPrice() <= model.getAmountPaid()) {
-            model.setStatus("DONE");
+            model.setStatus(Status.DONE);
             model.setPaymentDate(LocalDate.now());
             charge = model.getAmountPaid() - model.getPrice();
             model.setChange(charge);
@@ -70,8 +70,8 @@ public class ServiceService {
 
     public ResponseEntity<Void> cancelService(Long id) {
         var model = repository.findById(id).get();
-        if (model.getStatus().equals("PENDING")) {
-            model.setStatus("CANCELLED");
+        if (model.getStatus().equals(Status.PENDING)) {
+            model.setStatus(Status.CANCELLED);
             repository.saveAndFlush(model);
         }
         return ResponseEntity.ok().build();

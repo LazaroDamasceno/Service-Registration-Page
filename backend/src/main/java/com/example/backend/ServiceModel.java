@@ -26,6 +26,6 @@ public class ServiceModel {
     private Double amountPaid;
     private Double change;
     private LocalDate paymentDate;
-    private String status;
+    private Status status;
 
 }

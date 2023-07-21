@@ -15,7 +15,7 @@ export default function Home() {
         amountPaid: '',
         change: '',
         paymentDate: '',
-        status: ''
+        status: null
     })
 
     const [services, setServices] = useState([])
@@ -83,7 +83,7 @@ export default function Home() {
         price: '',
         amountPaid: '',
         paymentDate: '',
-        status: ''
+        status: null
       })}
 
     return (
